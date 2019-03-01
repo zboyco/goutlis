@@ -4,10 +4,15 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
+	"errors"
 )
 
-// AesEncrypt 加密
-func AesEncrypt(origData []byte, keyString string) []byte {
+// AesEncrypt 加密 CBC 128位
+func AesEncrypt(origData []byte, keyString string) ([]byte, error) {
+	if len(keyString) != 16 {
+		return nil, errors.New("Key's length is not 16")
+	}
+
 	k := []byte(keyString)
 
 	// 分组秘钥
@@ -22,10 +27,10 @@ func AesEncrypt(origData []byte, keyString string) []byte {
 	cryted := make([]byte, len(origData))
 	// 加密
 	blockMode.CryptBlocks(cryted, origData)
-	return cryted
+	return cryted, nil
 }
 
-// PKCS7Padding 补码
+// PKCS7Padding 补码填充
 func PKCS7Padding(ciphertext []byte, blocksize int) []byte {
 	padding := blocksize - len(ciphertext)%blocksize
 	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
