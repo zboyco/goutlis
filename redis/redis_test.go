@@ -1,6 +1,9 @@
 package redis
 
-import "testing"
+import (
+	"strconv"
+	"testing"
+)
 
 const checkMark = "\u2713"
 const ballotX = "\u2717"
@@ -66,5 +69,26 @@ func TestRedis(t *testing.T) {
 		} else {
 			t.Logf("Test Redis Delete End. %v %v ", affect, checkMark)
 		}
+	}
+}
+
+func BenchmarkRedis(b *testing.B) {
+	b.StopTimer()
+
+	conf := &RedisConfig{
+		Address:     "192.168.2.99:6379",
+		IdleTimeout: 30,
+		MaxActive:   3,
+		MaxIdle:     3,
+	}
+
+	InitRedis(conf)
+
+	b.StartTimer()
+
+	b.N = 1234
+
+	for i := 0; i < b.N; i++ {
+		Set("Test"+strconv.Itoa(i), "Test", 30)
 	}
 }
