@@ -73,7 +73,6 @@ func TestRedis(t *testing.T) {
 }
 
 func BenchmarkRedis(b *testing.B) {
-	b.StopTimer()
 
 	conf := &RedisConfig{
 		Address:     "192.168.2.99:6379",
@@ -84,9 +83,7 @@ func BenchmarkRedis(b *testing.B) {
 
 	InitRedis(conf)
 
-	b.StartTimer()
-
-	b.N = 1234
+	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
 		Set("Test"+strconv.Itoa(i), "Test", 30)
