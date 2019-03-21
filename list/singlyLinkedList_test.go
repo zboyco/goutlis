@@ -51,17 +51,12 @@ func TestGet(t *testing.T) {
 
 func TestRemove(t *testing.T) {
 	t.Log("测试删除")
-	err := l.Remove(1)
+	item, err := l.Remove(1)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	item, err := l.Get(1)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	t.Log(item.(string))
+	t.Log("remove data: " + item.(string))
 }
 
 func TestClear(t *testing.T) {

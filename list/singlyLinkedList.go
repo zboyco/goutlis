@@ -79,26 +79,29 @@ func (list *SinglyList) InsertAt(index int, item interface{}) error {
 }
 
 // Remove 移除元素
-func (list *SinglyList) Remove(index int) error {
+func (list *SinglyList) Remove(index int) (interface{}, error) {
 	list.Lock()
 	defer list.Unlock()
 	if index < 0 || list.lenght <= index {
-		return errors.New("索引超出界限")
+		return nil, errors.New("索引超出界限")
 	}
+	var curNode *singlyNode
 	if index == 0 {
+		curNode = list.front
 		list.front = list.front.next
 		if list.lenght == 1 {
 			list.rear = nil
 		}
 	} else {
 		preNode := list.findNode(index - 1)
-		preNode.next = preNode.next.next
+		curNode = preNode.next
+		preNode.next = curNode.next
 		if index == (list.lenght - 1) {
 			list.rear = preNode
 		}
 	}
 	list.lenght--
-	return nil
+	return curNode.value, nil
 }
 
 // Clear 清空链表
