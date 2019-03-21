@@ -1,13 +1,17 @@
-package encry
+package encry_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/zboyco/goutlis/encry"
+)
 
 func TestHashPassword(t *testing.T) {
 	t.Log("Test HashPassword Start")
 
 	testText := "password"
 	{
-		hashString, err := HashPassword(testText)
+		hashString, err := encry.HashPassword(testText)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -22,7 +26,7 @@ func TestVerifyPassword(t *testing.T) {
 
 	hashString := "$2a$10$oIWfMhLEDjmn7QcMHApOGOahyg4gIJ1zmsp.WNHdxypL092IrBMyq"
 	{
-		ok := VerifyPassword(testText, hashString)
+		ok := encry.VerifyPassword(testText, hashString)
 		if !ok {
 			t.Errorf("Test Verify Password End %v", ballotX)
 		} else {

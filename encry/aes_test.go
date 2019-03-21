@@ -1,8 +1,10 @@
-package encry
+package encry_test
 
 import (
 	"encoding/base64"
 	"testing"
+
+	"github.com/zboyco/goutlis/encry"
 )
 
 func TestAesEncrypt(t *testing.T) {
@@ -14,7 +16,7 @@ func TestAesEncrypt(t *testing.T) {
 
 	t.Logf("Text : \"%v\" , key : \"%v\"", testText, key)
 	{
-		bytes, err := AesEncrypt([]byte(testText), key)
+		bytes, err := encry.AesEncrypt([]byte(testText), key)
 		if err != nil {
 			t.Fatal(err)
 		}

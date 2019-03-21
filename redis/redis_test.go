@@ -1,8 +1,10 @@
-package redis
+package redis_test
 
 import (
 	"strconv"
 	"testing"
+
+	"github.com/zboyco/goutlis/redis"
 )
 
 const checkMark = "\u2713"
@@ -11,17 +13,17 @@ const ballotX = "\u2717"
 func TestRedis(t *testing.T) {
 	t.Log("Test Redis Start")
 
-	conf := &RedisConfig{
+	conf := &redis.RedisConfig{
 		Address:     "192.168.2.99:6379",
 		IdleTimeout: 30,
 		MaxActive:   3,
 		MaxIdle:     3,
 	}
-	InitRedis(conf)
+	redis.InitRedis(conf)
 
 	{
 		t.Log("Test Redis Set Start")
-		result, err := Set("Test", "Test", 10)
+		result, err := redis.Set("Test", "Test", 10)
 		if err != nil {
 			t.Fatalf("Test Redis Set End. %v %v ", err, ballotX)
 		}
@@ -34,7 +36,7 @@ func TestRedis(t *testing.T) {
 
 	{
 		t.Log("Test Redis Expire Start")
-		affect, err := Expire("Test", 10)
+		affect, err := redis.Expire("Test", 10)
 		if err != nil {
 			t.Fatalf("Test Redis Expire End. %v %v ", err, ballotX)
 		}
@@ -47,7 +49,7 @@ func TestRedis(t *testing.T) {
 
 	{
 		t.Log("Test Redis Exists Start")
-		has, err := Exists("Test")
+		has, err := redis.Exists("Test")
 		if err != nil {
 			t.Fatalf("Test Redis Exists End. %v %v ", err, ballotX)
 		}
@@ -60,7 +62,7 @@ func TestRedis(t *testing.T) {
 
 	{
 		t.Log("Test Redis Delete Start")
-		affect, err := Delete("Test")
+		affect, err := redis.Delete("Test")
 		if err != nil {
 			t.Fatalf("Test Redis Delete End. %v %v ", err, ballotX)
 		}
@@ -74,18 +76,18 @@ func TestRedis(t *testing.T) {
 
 func BenchmarkRedis(b *testing.B) {
 
-	conf := &RedisConfig{
+	conf := &redis.RedisConfig{
 		Address:     "192.168.2.99:6379",
 		IdleTimeout: 30,
 		MaxActive:   3,
 		MaxIdle:     3,
 	}
 
-	InitRedis(conf)
+	redis.InitRedis(conf)
 
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
-		Set("Test"+strconv.Itoa(i), "Test", 30)
+		redis.Set("Test"+strconv.Itoa(i), "Test", 30)
 	}
 }
