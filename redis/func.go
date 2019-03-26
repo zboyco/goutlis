@@ -22,10 +22,10 @@ func Expire(key string, ex int64) (int64, error) {
 }
 
 // Get 获取值
-func Get(key string) ([]byte, error) {
+func Get(key string) (interface{}, error) {
 	c := pool.Get()
 	defer c.Close()
-	return redigo.Bytes(c.Do("GET", key))
+	return c.Do("GET", key)
 }
 
 // Exists Key存在
