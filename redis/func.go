@@ -41,3 +41,10 @@ func Delete(key string) (int64, error) {
 	defer c.Close()
 	return redigo.Int64(c.Do("DEL", key))
 }
+
+// Keys 查询列表
+func Keys(key string) ([]string, error) {
+	c := pool.Get()
+	defer c.Close()
+	return redigo.Strings(c.Do("KEYS", key))
+}
