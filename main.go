@@ -8,5 +8,5 @@ import (
 )
 
 func main() {
-
+	// 库下不增加import的话go get 不能 get
 }
