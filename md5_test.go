@@ -1,9 +1,9 @@
-package encry_test
+package goutlis_test
 
 import (
 	"testing"
 
-	"github.com/zboyco/goutlis/encry"
+	"github.com/zboyco/goutlis"
 )
 
 func TestMD5(t *testing.T) {
@@ -13,7 +13,7 @@ func TestMD5(t *testing.T) {
 	resultString := "780c29c240e7c9cf6669eccfa7a321ad"
 
 	{
-		md5String := encry.MD5(testText)
+		md5String := goutlis.MD5(testText)
 		if md5String != resultString {
 			t.Errorf("Test MD5 End %v", ballotX)
 		} else {

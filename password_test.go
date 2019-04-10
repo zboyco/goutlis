@@ -1,9 +1,9 @@
-package encry_test
+package goutlis_test
 
 import (
 	"testing"
 
-	"github.com/zboyco/goutlis/encry"
+	"github.com/zboyco/goutlis"
 )
 
 func TestHashPassword(t *testing.T) {
@@ -11,7 +11,7 @@ func TestHashPassword(t *testing.T) {
 
 	testText := "password"
 	{
-		hashString, err := encry.HashPassword(testText)
+		hashString, err := goutlis.HashPassword(testText)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -26,7 +26,7 @@ func TestVerifyPassword(t *testing.T) {
 
 	hashString := "$2a$10$oIWfMhLEDjmn7QcMHApOGOahyg4gIJ1zmsp.WNHdxypL092IrBMyq"
 	{
-		ok := encry.VerifyPassword(testText, hashString)
+		ok := goutlis.VerifyPassword(testText, hashString)
 		if !ok {
 			t.Errorf("Test Verify Password End %v", ballotX)
 		} else {

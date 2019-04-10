@@ -1,4 +1,4 @@
-package list
+package goutlis
 
 import (
 	"errors"

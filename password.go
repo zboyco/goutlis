@@ -1,4 +1,4 @@
-package encry
+package goutlis
 
 import (
 	"golang.org/x/crypto/bcrypt"

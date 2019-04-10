@@ -1,16 +1,16 @@
-package list_test
+package goutlis_test
 
 import (
 	"strconv"
 	"testing"
 
-	"github.com/zboyco/goutlis/list"
+	"github.com/zboyco/goutlis"
 )
 
-var l *list.SinglyList
+var l *goutlis.SinglyList
 
 func init() {
-	l = &list.SinglyList{}
+	l = &goutlis.SinglyList{}
 }
 
 func TestAppend(t *testing.T) {

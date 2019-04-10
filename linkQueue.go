@@ -1,14 +1,12 @@
-package queue
+package goutlis
 
 import (
 	"errors"
-
-	"github.com/zboyco/goutlis/list"
 )
 
 // LinkQueue 链表队列
 type LinkQueue struct {
-	list.SinglyList
+	SinglyList
 }
 
 // Enqueue 入队

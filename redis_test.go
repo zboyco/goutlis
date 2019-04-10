@@ -1,25 +1,22 @@
-package redis_test
+package goutlis_test
 
 import (
 	"strconv"
 	"testing"
 
-	"github.com/zboyco/goutlis/redis"
+	"github.com/zboyco/goutlis"
 )
-
-const checkMark = "\u2713"
-const ballotX = "\u2717"
 
 func TestRedis(t *testing.T) {
 	t.Log("Test Redis Start")
 
-	conf := &redis.RedisConfig{
+	conf := &goutlis.RedisConfig{
 		Address:     "192.168.2.99:6379",
 		IdleTimeout: 30,
 		MaxActive:   3,
 		MaxIdle:     3,
 	}
-	redis.InitRedis(conf)
+	redis := goutlis.InitRedis(conf)
 
 	{
 		t.Log("Test Redis Set Start")
@@ -76,14 +73,14 @@ func TestRedis(t *testing.T) {
 
 func BenchmarkRedis(b *testing.B) {
 
-	conf := &redis.RedisConfig{
+	conf := &goutlis.RedisConfig{
 		Address:     "192.168.2.99:6379",
 		IdleTimeout: 30,
 		MaxActive:   3,
 		MaxIdle:     3,
 	}
 
-	redis.InitRedis(conf)
+	redis := goutlis.InitRedis(conf)
 
 	b.ResetTimer()
 
