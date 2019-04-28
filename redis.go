@@ -8,13 +8,13 @@ import (
 
 // RedisConfig Redis配置信息
 type RedisConfig struct {
-	Address     string //
+	Address     string
 	Password    string
 	Db          string
-	MaxIdle     int
-	MaxActive   int
-	IdleTimeout time.Duration
-	Wait        bool
+	MaxIdle     int           // 最大空闲连接数
+	MaxActive   int           // 最大连接数
+	IdleTimeout time.Duration // 空闲连接超时时间
+	Wait        bool          // 如果超过最大连接，是否等待，不等待则报错
 }
 
 // Redis Redis结构
