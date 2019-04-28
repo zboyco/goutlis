@@ -8,12 +8,13 @@ import (
 
 // RedisConfig Redis配置信息
 type RedisConfig struct {
-	Address     string
+	Address     string //
 	Password    string
 	Db          string
 	MaxIdle     int
 	MaxActive   int
 	IdleTimeout time.Duration
+	Wait        bool
 }
 
 // Redis Redis结构
@@ -27,7 +28,8 @@ func InitRedis(conf *RedisConfig) *Redis {
 		pool: &redigo.Pool{
 			MaxIdle:     conf.MaxIdle,
 			MaxActive:   conf.MaxActive,
-			IdleTimeout: (conf.IdleTimeout * time.Second),
+			IdleTimeout: conf.IdleTimeout * time.Second,
+			Wait:        conf.Wait,
 			Dial: func() (redigo.Conn, error) {
 				c, err := redigo.Dial("tcp", conf.Address)
 				if err != nil {
